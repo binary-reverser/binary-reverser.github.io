@@ -7,13 +7,15 @@
   
   <title>Android平台编译ARM汇编的两种姿势 | Security Notes</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="article">
+  <meta name="description" content="AndroidStudio3.x�[F�HP�N���C中��V��Qarm��G��V��P�VG件��H以arm64为��K��Ibuild.gradle中设置�[��| ~G��L��[�H��VG件��P��L�^��^~D:defaultConfig {        ndk {            abiFilters ‘arm64-v8a’        }    } CMakeL">
+<meta property="og:type" content="article">
 <meta property="og:title" content="Android平台编译ARM汇编的两种姿势">
 <meta property="og:url" content="http://example.com/2020/09/29/Android%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91ARM%E6%B1%87%E7%BC%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A7%BF%E5%8A%BF/index.html">
 <meta property="og:site_name" content="Security Notes">
+<meta property="og:description" content="AndroidStudio3.x�[F�HP�N���C中��V��Qarm��G��V��P�VG件��H以arm64为��K��Ibuild.gradle中设置�[��| ~G��L��[�H��VG件��P��L�^��^~D:defaultConfig {        ndk {            abiFilters ‘arm64-v8a’        }    } CMakeL">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2020-09-29T08:45:17.000Z">
-<meta property="article:modified_time" content="2020-09-29T08:45:17.348Z">
+<meta property="article:modified_time" content="2020-09-29T09:42:36.277Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -86,7 +88,16 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h1 id="AndroidStudio3-x�-F�HP�N���C中��V��Qarm��G��V��P�VG件��H以arm64为��K��I"><a href="#AndroidStudio3-x�-F�HP�N���C中��V��Qarm��G��V��P�VG件��H以arm64为��K��I" class="headerlink" title="AndroidStudio3.x�[F�HP�N���C中��V��Qarm��G��V��P�VG件��H以arm64为��K��I"></a>AndroidStudio3.x�<del>[</del>F�<del>H</del>P�<del>N���</del>C中��<del>V��</del>Qarm��<del>G��</del>V��<del>P�</del>V<del>G件��</del>H以arm64为��<del>K��</del>I</h1><p>build.gradle中设置�<del>[��| ~G��</del>L��<del>[�</del>H��<del>V</del>G件��<del>P��</del>L�<del>^��</del>^~D:<br>defaultConfig {<br>        ndk {<br>            abiFilters ‘arm64-v8a’<br>        }<br>    }</p>
+<p>CMakeLists.txt中�<del>Z</del>D�<del>E</del>M置</p>
+<p>使�<del>C���</del>G��<del>V��</del>V��<del>Q��</del>Z<br>set(can_use_assembler TRUE)<br>enable_language(ASM)</p>
+<p>add_definitions(-DANDROID -DOC_ARM_ASM)</p>
+<p>以�<del>]</del>Y�<del>@</del>A��<del>S�</del>Z<del>D�</del>V���<del>O�</del>M<del>U�</del>K���<del>V��</del>Q��<del>G��</del>V��<del>P�</del>V<del>G件��</del>Z<br>add_library( assembly-lib STATIC<br>             src/main/assembly/syscall.s )</p>
+<p>��<del>F�</del>]<del>Y�</del>@<del>A��</del>S�<del>S��</del>N��<del>H��</del>[��| <del>G�</del>E�享��<del>S�</del>V<del>G件��</del>Z<br>target_link_libraries( # Specifies the target library.<br>                       native-lib<br>                       assembly-lib<br>                       # Links the target library to the log library<br>                       # included in the NDK.<br>                        )</p>
+<h1 id="�-Z��Gandroid-ndk工�E��S��IK�J���V��Q��G��V��P�VG件��H以arm32为��K��I"><a href="#�-Z��Gandroid-ndk工�E��S��IK�J���V��Q��G��V��P�VG件��H以arm32为��K��I" class="headerlink" title="�@Z��Gandroid-ndk工�E��S��IK�J���V��Q��G��V��P�VG件��H以arm32为��K��I"></a>�<del>@</del>Z��<del>Gandroid-ndk工�</del>E��<del>S��</del>I<del>K�</del>J���<del>V��</del>Q��<del>G��</del>V��<del>P�</del>V<del>G件��</del>H以arm32为��<del>K��</del>I</h1><p>Application.mk中设置�<del>[��| ~G��</del>L��<del>[�</del>H��<del>V</del>G件��<del>P��</del>L�<del>^��</del>^~D:<br>APP_ABI := armeabi-v7a</p>
+<p>�<del>E</del>M置Android.mk��~Z<br>LOCAL_SRC_FILES := syscall.s</p>
+<p>�<del>Q�令��</del>L��<del>K�</del>I���<del>Lndk-build�</del>M��<del>O���</del>F��<del>G��</del>V��<del>P�</del>V<del>G件��</del>V��<del>Q�</del>H��<del>[��| ~G�</del>E�享��<del>S�</del>@~B</p>
+
       
     </div>
     <footer class="article-footer">
