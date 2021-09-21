@@ -122,23 +122,19 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="一-概要"><a href="#一-概要" class="headerlink" title="一 概要"></a>一 概要</h2><p>1 AndroidStudio编译arm汇编源文件<br>2 android-ndk编译汇编源文件</p>
-<h2 id="二-AndroidStudio3-x集成环境中编译arm汇编源文件（以arm64为例）"><a href="#二-AndroidStudio3-x集成环境中编译arm汇编源文件（以arm64为例）" class="headerlink" title="二 AndroidStudio3.x集成环境中编译arm汇编源文件（以arm64为例）"></a>二 AndroidStudio3.x集成环境中编译arm汇编源文件（以arm64为例）</h2><h3 id="1-build-gradle中设置目标二进制文件运行架构"><a href="#1-build-gradle中设置目标二进制文件运行架构" class="headerlink" title="1 build.gradle中设置目标二进制文件运行架构"></a>1 build.gradle中设置目标二进制文件运行架构</h3><p>defaultConfig {<br>        ndk {<br>            abiFilters ‘arm64-v8a’<br>        }<br>    }</p>
-<h3 id="2-CMakeLists-txt中的配置"><a href="#2-CMakeLists-txt中的配置" class="headerlink" title="2 CMakeLists.txt中的配置"></a>2 CMakeLists.txt中的配置</h3><h4 id="2-1-使能汇编编译"><a href="#2-1-使能汇编编译" class="headerlink" title="2.1 使能汇编编译"></a>2.1 使能汇编编译</h4><p>set(can_use_assembler TRUE)<br>enable_language(ASM)</p>
-<p>add_definitions(-DANDROID -DOC_ARM_ASM)</p>
-<h4 id="2-2-以静态库的方式单独编译汇编源文件"><a href="#2-2-以静态库的方式单独编译汇编源文件" class="headerlink" title="2.2 以静态库的方式单独编译汇编源文件"></a>2.2 以静态库的方式单独编译汇编源文件</h4><p>add_library( assembly-lib STATIC<br>             src/main/assembly/syscall.s )</p>
-<h4 id="2-3-将静态库链接到目标共享库文件"><a href="#2-3-将静态库链接到目标共享库文件" class="headerlink" title="2.3 将静态库链接到目标共享库文件"></a>2.3 将静态库链接到目标共享库文件</h4><p>target_link_libraries( # Specifies the target library.<br>                       native-lib<br>                       assembly-lib<br>                       # Links the target library to the log library<br>                       # included in the NDK.<br>                        )</p>
-<h2 id="三-通过android-ndk工具链手动编译汇编源文件（以arm32为例）"><a href="#三-通过android-ndk工具链手动编译汇编源文件（以arm32为例）" class="headerlink" title="三 通过android-ndk工具链手动编译汇编源文件（以arm32为例）"></a>三 通过android-ndk工具链手动编译汇编源文件（以arm32为例）</h2><h3 id="1-Application-mk中设置目标二进制文件运行架构"><a href="#1-Application-mk中设置目标二进制文件运行架构" class="headerlink" title="1 Application.mk中设置目标二进制文件运行架构"></a>1 Application.mk中设置目标二进制文件运行架构</h3><p>APP_ABI := armeabi-v7a</p>
-<h3 id="2-配置Android-mk"><a href="#2-配置Android-mk" class="headerlink" title="2 配置Android.mk"></a>2 配置Android.mk</h3><p>LOCAL_SRC_FILES := syscall.s</p>
-<p>命令行下执行ndk-build即可将汇编源文件编译到目标共享库。</p>
-
+        <h2 id="一-概要"><a href="#一-概要" class="headerlink" title="一 概要"></a>一 概要</h2><p>在Android ndk开发中，特别是开发与安全相关功能的时候，经常需要使用汇编和c/c++的混合编程，本文介绍两种将arm汇编引入Android ndk编程的编译配置方式，供大家参考和学习。这两种方式包括：<br>1 AndroidStudio编译arm汇编源文件<br>2 android-ndk编译汇编源文件</p>
+        
+          <p class="article-more-link">
+            <a href="/2020/09/29/Android%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91ARM%E6%B1%87%E7%BC%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A7%BF%E5%8A%BF/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
       <a data-url="http://example.com/2020/09/29/Android%E5%B9%B3%E5%8F%B0%E7%BC%96%E8%AF%91ARM%E6%B1%87%E7%BC%96%E7%9A%84%E4%B8%A4%E7%A7%8D%E5%A7%BF%E5%8A%BF/" data-id="ckttiq9m300013iwrdy1u11al" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm-android/" rel="tag">arm android</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/arm-android-ndk-arm%E6%B1%87%E7%BC%96%E7%BC%96%E8%AF%91/" rel="tag">arm android ndk arm汇编编译</a></li></ul>
 
     </footer>
   </div>
@@ -160,7 +156,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm-android/" rel="tag">arm android</a></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/arm-android-ndk-arm%E6%B1%87%E7%BC%96%E7%BC%96%E8%AF%91/" rel="tag">arm android ndk arm汇编编译</a></li></ul>
     </div>
   </div>
 
@@ -170,7 +166,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/arm-android/" style="font-size: 10px;">arm android</a>
+      <a href="/tags/arm-android-ndk-arm%E6%B1%87%E7%BC%96%E7%BC%96%E8%AF%91/" style="font-size: 10px;">arm android ndk arm汇编编译</a>
     </div>
   </div>
 
